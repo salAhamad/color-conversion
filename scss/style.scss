@@ -1,0 +1,156 @@
+@import './variables';
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--base-fallback-bg-color);
+  color: var(--base-color);
+  font-family: var(--kanit), var(--roboto), sans-serif;
+}
+
+
+header {
+  position: relative;
+  height: var(--header-height);
+  position: fixed;
+  z-index: 20;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0 calc(1rem + var(--base-body-gap));
+  display: flex;
+  align-items: center;
+
+  .logo {
+    svg {
+      max-width: calc(var(--header-height) + 3.5vw);
+      color: var(--base-color);
+      #path-brush {
+        color: var(--base-logo-brush-color);
+      }
+    }
+  }
+}
+
+.main-wrapper {
+  position: relative;
+  background-color: var(--base-bg-color);
+  width: 100%;
+  min-height: 100vh;
+  padding-block: calc(var(--header-height) + 1vw) calc(1rem + var(--base-body-gap));
+  padding-inline: calc(1rem + var(--base-body-gap));
+  display: flex;
+}
+
+.main {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .color-conversion-heading {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    span {
+      letter-spacing: .15rem;
+      font-weight: 600;
+      &:not(&:last-child) { font-weight: 100; }
+    }    
+    i { font-size: 80%; opacity: 0.5; }
+  }
+  .inputs-container {
+    --input-height: 70px;
+    --input-padding-x: calc(var(--input-height) / 3);
+    --input-border-radius: .5rem;
+    --input-border-color: var(--white);
+    --input-border-width: 1px;
+    --input-label-color: var(--base-color);
+    --input-font-size: clamp(1rem, 5vw, 1.65rem);
+
+    position: relative;
+    width: 100%;
+    max-width: 500px;    
+    display: flex;
+    flex-direction: column;
+
+    .reverse-button {
+      width: calc(var(--input-height) / 1.5);
+      height: calc(var(--input-height) / 1.5);
+      border-radius: var(--input-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--base-bg-color);
+      color: var(--base-color);
+      font-size: var(--input-font-size);
+      position: absolute;
+      top: calc(50% - calc(var(--input-height) / 3.0));
+      right: var(--input-padding-x);
+      box-shadow: inset 0 0 0 var(--input-border-width) var(--input-border-color);
+      z-index: 3;
+      i { rotate: 90deg;}
+    }
+    &__input {
+      position: relative;
+      display: flex;
+      flex-direction: row-reverse;
+      height: var(--input-height);
+      // border: var(--input-border-width) solid var(--base-color);
+      box-shadow: inset 0 0 0 var(--input-border-width) var(--input-border-color);
+      transition: var(--transition);
+
+      label {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        color: var(--input-label-color);
+        padding-inline: var(--input-padding-x);
+        font-size: var(--input-font-size);
+        transition: var(--transition);
+      }
+      
+      input {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        outline-color: transparent;
+        border: 0;
+        font-size: var(--input-font-size);
+        background-color: transparent;
+        // padding-inline: var(--input-padding-x);
+        color: var(--base-color);
+        &::placeholder {
+          color: var(--base-color);
+          opacity: .25;
+        }
+      }
+      &:first-child {
+        border-top-left-radius: var(--input-border-radius);
+        border-top-right-radius: var(--input-border-radius);
+        margin-bottom: calc(0px - var(--input-border-width));
+      }
+      &:last-child {
+        border-bottom-left-radius: var(--input-border-radius);
+        border-bottom-right-radius: var(--input-border-radius);
+      }
+      &:focus-within {
+        --input-label-color: var(--primary);
+        --input-border-color: var(--primary);
+        z-index: 1;
+      }
+    }
+  }
+}

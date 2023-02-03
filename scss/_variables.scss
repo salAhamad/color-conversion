@@ -1,0 +1,16 @@
+:root {
+  --base-bg-color: '';
+  --base-color: #E6e6e6;
+  --base-fallback-bg-color: #191919;
+  --base-body-gap: 2.5vw;
+
+  --primary: #FB9A09;
+  --white: #e6e6e6;
+  --dark: #262626;
+  --base-logo-brush-color: var(--primary);
+  --roboto: 'Roboto', sans-serif; 
+  --kanit: 'Kanit', sans-serif;
+  --header-height: calc(90px + 1vw);
+  
+  --transition: all .5s ease-in-out;
+}
