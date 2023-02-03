@@ -93,6 +93,7 @@ header .logo svg #path-brush {
   --input-border-width: 1px;
   --input-label-color: var(--base-color);
   --input-font-size: clamp(1rem, 5vw, 1.65rem);
+  --input-reverse-icon-size: calc(var(--input-height) / 1.5);
   position: relative;
   width: 100%;
   max-width: 500px;
@@ -100,23 +101,29 @@ header .logo svg #path-brush {
   flex-direction: column;
 }
 .main .inputs-container .reverse-button {
-  width: calc(var(--input-height) / 1.5);
-  height: calc(var(--input-height) / 1.5);
+  width: var(--input-reverse-icon-size);
+  height: var(--input-reverse-icon-size);
   border-radius: var(--input-height);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--base-bg-color);
+  background-color: var(--base-fallback-bg-color);
   color: var(--base-color);
   font-size: var(--input-font-size);
   position: absolute;
-  top: calc(50% - var(--input-height) / 3);
+  top: calc(100% - var(--input-reverse-icon-size) / 2);
   right: var(--input-padding-x);
   box-shadow: inset 0 0 0 var(--input-border-width) var(--input-border-color);
   z-index: 3;
+  cursor: pointer;
+  transition: var(--transition);
 }
 .main .inputs-container .reverse-button i {
   rotate: 90deg;
+}
+.main .inputs-container .reverse-button:hover {
+  background-color: var(--primary);
+  color: var(--white);
 }
 .main .inputs-container__input {
   position: relative;
