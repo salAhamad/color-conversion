@@ -4,9 +4,12 @@ const $rgbInputs = document.querySelectorAll('.rgb-input');
 const $reverseButton = document.querySelector('.reverse-button');
 const $labelHEX = document.querySelector('.label-hex');
 const $labelRGB = document.querySelector('.label-rgb');
+const $copyBlockRGB = document.querySelector('.copy-block-rgb');
+const $copyBlockHEX = document.querySelector('.copy-block-hex');
 
 let error_enabled = false;
-let hexValue, converted_rgb_value, color_brightness;
+let hexValue = '#191919;';
+let converted_rgb_value, color_brightness;
 
 // ============ [ RGB TO HEX FUNCTION ] ============ //
 const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
@@ -71,10 +74,16 @@ function sliceHexColor(color) {
   return hex_value = color.slice(0, 6)  
 }
 
+// ============ [ copy to clipboard ] ============ //
+function copyToClipboard(event) {
+  navigator.clipboard.writeText(event);
+}
+
 // ============ [ RGB to HEX Conversion ] ============ //
-let redValue = 0;
-let greenValue = 0;
-let blueValue = 0;
+let redValue = 9;
+let greenValue = 25;
+let blueValue = 25;
+
 $rgbInputs.forEach((input, index) => {
   input.addEventListener('input', e => {
     let thisElem = e.target;
@@ -84,6 +93,8 @@ $rgbInputs.forEach((input, index) => {
     let thisInputParent = thisElem.parentNode.parentNode;
     let input_alert = thisInputParent.querySelector('.input-alert');
     let nextSibling = e.target.nextElementSibling;
+
+    
 
     if(thisElem_value > 255) {
       input_alert.innerHTML = `Input value cannot be more than ${rgb_max_value}`;
@@ -162,7 +173,6 @@ $inputHex.addEventListener('input', (e) => {
 });
 
 // ============ [ Reverse Fields ] ============ //
-
 $reverseButton.addEventListener('click', (event) => {
   let thisParent = event.target.parentNode;
   thisParent.classList.toggle('reversed');
@@ -173,5 +183,12 @@ $reverseButton.addEventListener('click', (event) => {
     $labelHEX.innerHTML = 'HEX';
     $labelRGB.innerHTML = 'RGB';
   }
-  console.log(thisParent);
-})
+});
+
+
+
+$copyBlockRGB.addEventListener('click', e => {
+  let combinedRgbValue = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+  copyToClipboard(combinedRgbValue)
+});
+$copyBlockHEX.addEventListener('click', e => copyToClipboard(hexValue));
