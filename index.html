@@ -31,18 +31,22 @@
         <span class="label-hex">HEX</span> 
         <i class="fa-solid fa-arrow-right"></i>
         <span class="label-rgb">RGB</span> 
-        <!-- <small>Note: The color length cannot be less than 3 and more the 6. (Except #)</small> -->
       </h1>
       <div class="inputs-container">
-        <div class="inputs-container__input">
-          <input type="text" id="hexValue" maxlength="7" value="#000000" placeholder="#000000"/>
-          <label for="hexValue">HEX:</label>
-          <span class="reverse-button"><i class="fa-solid fa-arrow-right-arrow-left"></i></span>
+        <span class="reverse-button"><i class="fa-solid fa-arrow-right-arrow-left"></i></span>
+        <div class="inputs-container__input inputs-container__input--hex">
+          <input type="text" name="input-hex" class="color-input" id="hexValue" maxlength="7" value="000000" placeholder="#000000"/>
+          <label for="hexValue">HEX (#):</label>
+          <small class="input-alert display--none"></small>
         </div>
-        <div class="inputs-container__input">
-          <input type="text" id="rgbValue" maxlength="13" value="255, 255, 255" placeholder="255, 255, 255"/>
-          
+        <div class="inputs-container__input inputs-container__input--rgb">
+          <div class="rgb-inputs">
+            <input type="text" name="value-red" class="rgb-input" id="rgbValue1" maxlength="3" value="255" placeholder="255"/>
+            <input type="text" name="value-green" class="rgb-input" id="rgbValue2" maxlength="3" value="255" placeholder="255"/>
+            <input type="text" name="value-blue" class="rgb-input" id="rgbValue3" maxlength="3" value="255" placeholder="255"/>
+          </div>
           <label for="rgbValue">RGB:</label>
+          <small class="input-alert display--none"></small>
         </div>
       </div>
     </main>
