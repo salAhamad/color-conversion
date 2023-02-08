@@ -137,6 +137,7 @@ header .logo svg #path-brush {
   box-shadow: inherit;
   border-radius: inherit;
   z-index: -1;
+  transition: var(--transition);
 }
 .main .inputs-container .reverse-button i {
   rotate: 90deg;
@@ -145,6 +146,7 @@ header .logo svg #path-brush {
 }
 .main .inputs-container .reverse-button:hover {
   transition: var(--transition);
+  --base-bg-color: var(--primary);
   --input-reverse-border-color: var(--primary);
   background-color: var(--primary);
   color: var(--dark);
@@ -158,7 +160,6 @@ header .logo svg #path-brush {
   transition: var(--transition);
 }
 .main .inputs-container__input .copy-block {
-  box-shadow: inset 0 0 0 1px var(--primary);
   color: var(--primary);
   position: absolute;
   width: calc(var(--input-height) / 1.6);
@@ -178,6 +179,28 @@ header .logo svg #path-brush {
 .main .inputs-container__input .copy-block i {
   font-size: 150%;
   pointer-events: none;
+}
+.main .inputs-container__input .copy-block .coppeid-tooltip {
+  --pointer-size: 6px;
+  position: absolute;
+  right: calc(100% + var(--pointer-size));
+  background-color: var(--white);
+  color: var(--dark);
+  padding: 0.15rem 0.45rem;
+  font-size: 0.85rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  transition-delay: 1s;
+}
+.main .inputs-container__input .copy-block .coppeid-tooltip::after {
+  left: 100%;
+  content: "";
+  position: absolute;
+  border-top: var(--pointer-size) solid transparent;
+  border-bottom: var(--pointer-size) solid transparent;
+  border-left: calc(var(--pointer-size) - 1px) solid var(--white);
 }
 .main .inputs-container__input .copy-block:hover {
   background-color: var(--primary);
@@ -214,6 +237,7 @@ header .logo svg #path-brush {
   border: 0;
   font-size: var(--input-font-size);
   background-color: transparent;
+  text-transform: uppercase;
   color: var(--base-color);
 }
 .main .inputs-container__input input::-moz-placeholder {
@@ -261,14 +285,14 @@ header .logo svg #path-brush {
 }
 .main .inputs-container.reversed .inputs-container__input--hex {
   border-radius: 0 0 var(--input-border-radius) var(--input-border-radius);
-  top: var(--input-height);
+  top: calc(var(--input-height) - 1px);
 }
 .main .inputs-container.reversed .inputs-container__input--hex .input-alert {
   top: calc(100% + 0.5rem);
 }
 .main .inputs-container.reversed .inputs-container__input--rgb {
   border-radius: var(--input-border-radius) var(--input-border-radius) 0 0;
-  top: calc(0px - var(--input-height) + 2px);
+  top: calc(0px - var(--input-height) + 1px);
 }
 .main .inputs-container.reversed .inputs-container__input--rgb .input-alert {
   top: calc(100% + var(--input-height) + 0.5rem);
