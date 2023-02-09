@@ -98,10 +98,6 @@ function sliceHexColor(color) {
   return hex_value = color.slice(0, 6)  
 }
 
-// ============ [ copy to clipboard ] ============ //
-function copyToClipboard(event) {
-  navigator.clipboard.writeText(event);
-}
 
 // ============ [ create copy tooltip after click ] ============ //
 const coppeidTooltipCreation = (e, tooltipValue) => {
@@ -168,7 +164,6 @@ $inputHex.addEventListener('input', (e) => {
   let thisInput = e.target;
   let thisInputParent = thisInput.parentNode;
 
-  let input_type = thisInput.name;
   let input_value = sliceHexColor(thisInput.value);
   let input_max_value = 6;
   let input_min_value = 3;
@@ -198,7 +193,11 @@ $inputHex.addEventListener('input', (e) => {
   }
   
   hexValue = input_value.includes('#') ? input_value : `#${input_value}`;
-  const [ r, g, b ] = hexToRgb(input_value)   
+  const [ r, g, b ] = hexToRgb(input_value)
+  redValue = +r
+  greenValue = +g
+  blueValue = +b
+  console.log(redValue, greenValue, blueValue);
   $rgbInputs.forEach((input, index) => {
     if(index === 0) input.value = r;
     if(index === 1) input.value = g;
@@ -223,6 +222,11 @@ $reverseButton.addEventListener('click', (event) => {
   }
 });
 
+// ============ [ copy to clipboard common function ] ============ //
+function copyToClipboard(event) {
+  navigator.clipboard.writeText(event);
+}
+
 // ============ [ RGB : Coppied to Clipborad ] ============ //
 $copyBlockRGB.addEventListener('click', e => {
   let combinedRgbValue = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
@@ -236,50 +240,3 @@ $copyBlockHEX.addEventListener('click', e => {
   copyToClipboard(hexValue.toUpperCase())
 });
 
-// ============ [ Checking if primary color ] ============ //
-
-
-
-function adjustBrightness(col, amt) {
-  var usePound = false;
-  if (col[0] == "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
-
-  var R = parseInt(col.substring(0,2),16);
-  var G = parseInt(col.substring(2,4),16);
-  var B = parseInt(col.substring(4,6),16);
-
-  // to make the colour less bright than the input
-  // change the following three "+" symbols to "-"
-  R = R + amt;
-  G = G + amt;
-  B = B + amt;
-
-  if (R > 255) R = 255;
-  else if (R < 0) R = 0;
-
-  if (G > 255) G = 255;
-  else if (G < 0) G = 0;
-
-  if (B > 255) B = 255;
-  else if (B < 0) B = 0;
-  var RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16));
-  var GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16));
-  var BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16));
-
-  return (usePound?"#":"") + RR + GG + BB;
-}
-
-const shades_container = document.querySelector('.colors_shade');
-const generateShades = (color) => {
-  for (let i = 0; i < shades_length; i++) {
-    let bg_color = adjustBrightness(color, i);
-    const li = document.createElement('li');
-    li.classList.add('item');
-    li.style.backgroundColor = bg_color;
-    li.innerHTML = bg_color;
-    shades_container.appendChild(li);
-  }
-}
